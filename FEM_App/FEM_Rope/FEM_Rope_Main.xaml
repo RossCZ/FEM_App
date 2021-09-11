@@ -1,0 +1,12 @@
+﻿<Window x:Class="FEM_App.FEM_Rope.FEM_Rope_Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FEM_App.FEM_Rope"
+        mc:Ignorable="d"
+        Title="FEM Rope" Height="300" Width="300">
+    <Grid>
+        <TextBlock Text="Under construction..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Window>

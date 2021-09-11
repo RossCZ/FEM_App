@@ -1,0 +1,39 @@
+﻿<Window x:Class="FEM_App.FEM_Wall.EditationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FEM_App.FEM_Rope"
+		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Wall layer - edit/add" Height="250" MinHeight="250" MaxHeight="250" Width="300" MinWidth="300" MaxWidth="300">
+
+	<Grid Margin="10">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="100"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+		</Grid.RowDefinitions>
+
+		<TextBlock Text="Wall layer:" Grid.Column="0" Grid.Row="0" FontWeight="Bold" VerticalAlignment="Center"/>
+
+		<TextBlock Text="Name:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+		<TextBox Name="TB_Name" Grid.Column="1" Grid.Row="1" Height="25" VerticalAlignment="Center" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+
+		<TextBlock Text="Thickness [m]:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+		<xctk:DecimalUpDown Name="NB_width" Minimum="0.001" FormatString=" {0:F3}" Increment="0.01" Height="25" Grid.Row="2" Grid.Column="1" />
+
+
+		<TextBlock Text="Lambda [W/m/K]:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
+		<xctk:DecimalUpDown Name="NB_lambda" Minimum="0.001" FormatString=" {0:F3}" Increment="0.1" Height="25" Grid.Row="3" Grid.Column="1" />
+
+		<Button Content="OK" Grid.Row="4" Grid.ColumnSpan="2" Width="100" Height="25" HorizontalAlignment="Right" Click="BTN_OK_Click"/>
+	</Grid>
+</Window>

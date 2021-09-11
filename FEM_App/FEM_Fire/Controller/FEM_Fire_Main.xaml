@@ -1,0 +1,206 @@
+﻿<Window x:Class="FEM_App.FEM_Fire.FEM_Fire_Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FEM_App.FEM_Fire"
+		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+		xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="FEM Fire (Beta)" Height="950" Width="1200" SizeChanged="RefreshUI">
+	<Page>
+		<Page.Resources>
+			<sys:Double x:Key="NB_height">20</sys:Double>
+			<sys:Double x:Key="NB_width">75</sys:Double>
+		</Page.Resources>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="300"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<!-- CONTROL PANEL BACKGROUND -->
+			<Canvas Grid.Column="0" Background="Beige" Margin="10"/>
+
+			<!-- CONTROL PANEL -->
+			<ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+				<Grid Grid.Column="0" Margin="10" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+
+					<!-- Cross section settings -->
+					<Grid Grid.Row="0" Name="BlockCSS">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="180"/>
+							<ColumnDefinition Width="80"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="30"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="10"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Text="Cross-section settings:" FontSize="16" FontWeight="Bold" Grid.Row="0"/>
+
+						<TextBlock Text="Width [mm]" Grid.Row="1"/>
+						<xctk:DecimalUpDown Name="NB_cssWidth" DefaultValue="300" Minimum="20" Maximum="1000" FormatString=" {0:F0}" Increment="10" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="1" Grid.Column="1" />
+
+						<TextBlock Text="Height [mm]" Grid.Row="2"/>
+						<xctk:DecimalUpDown Name="NB_cssHeight" DefaultValue="500" Minimum="20" Maximum="1000" FormatString=" {0:F0}" Increment="10" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="2" Grid.Column="1" />
+
+						<TextBlock Text="Thermal conductivity [W/m/K]" Grid.Row="3"/>
+						<xctk:DecimalUpDown Name="NB_thermalConductivity" DefaultValue="1.2" Minimum="0.01" FormatString=" {0:F2}" Increment="0.1" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="3" Grid.Column="1" />
+
+					</Grid>
+
+					<!-- Temperature settings -->
+					<Grid Grid.Row="1" Name="BlockTemperature">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="180"/>
+							<ColumnDefinition Width="80"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="30"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="10"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Text="Temperature settings:" FontSize="16" FontWeight="Bold" Grid.Row="0"/>
+
+						<TextBlock Text="Temperature left [°C]" Grid.Row="1"/>
+						<xctk:DecimalUpDown Name="NB_tempLeft" DefaultValue="800" Minimum="20" Maximum="800" FormatString=" {0:F0}" Increment="10" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="1" Grid.Column="1" />
+
+						<TextBlock Text="Temperature top [°C]" Grid.Row="2"/>
+						<xctk:DecimalUpDown Name="NB_tempTop" DefaultValue="20" Minimum="20" Maximum="800" FormatString=" {0:F0}" Increment="10" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="2" Grid.Column="1" />
+
+						<TextBlock Text="Temperature right [°C]" Grid.Row="3"/>
+						<xctk:DecimalUpDown Name="NB_tempRight" DefaultValue="200" Minimum="20" Maximum="800" FormatString=" {0:F0}" Increment="10" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="3" Grid.Column="1" />
+
+						<TextBlock Text="Temperature bottom [°C]" Grid.Row="4"/>
+						<xctk:DecimalUpDown Name="NB_tempBottom" DefaultValue="600" Minimum="20" Maximum="800" FormatString=" {0:F0}" Increment="10" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="4" Grid.Column="1" />
+
+						<TextBlock Text="Initial temperature [°C]" Grid.Row="5"/>
+						<xctk:DecimalUpDown Name="NB_tempInit" DefaultValue="20" Minimum="20" Maximum="800" FormatString=" {0:F0}" Increment="10" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="5" Grid.Column="1" />
+
+					</Grid>
+
+
+					<!-- FEM settings -->
+					<Grid Grid.Row="2" Name="BlockFEM">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="180"/>
+							<ColumnDefinition Width="80"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="30"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="10"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Text="FEM settings:" FontSize="16" FontWeight="Bold" Grid.Row="0"/>
+
+						<TextBlock Text="Elements per 10 mm" Grid.Row="1"/>
+						<xctk:DecimalUpDown Name="NB_numElemPerUnit" DefaultValue="1" Minimum="1" Maximum="10" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="1" Grid.Column="1" />
+
+						<TextBlock Text="Final time [s]" Grid.Row="2"/>
+						<xctk:DecimalUpDown Name="NB_finalTime" DefaultValue="900" Minimum="10" FormatString=" {0:F0}" Increment="100" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="2" Grid.Column="1" />
+
+						<TextBlock Text="" Name="TB_finalTimeFormatted" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
+
+						<TextBlock Text="Time step [s]" Grid.Row="4"/>
+						<xctk:DecimalUpDown Name="NB_timeStep" DefaultValue="0.1" Minimum="0.01" FormatString=" {0:F2}" Increment="0.1" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI_calcSettings" Grid.Row="4" Grid.Column="1" />
+
+					</Grid>
+					
+					<!-- Draw settings -->
+					<Grid Grid.Row="4" Name="BlockDrawingSettings">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="180"/>
+							<ColumnDefinition Width="80"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="30"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="10"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Text="Drawing settings:" FontSize="16" FontWeight="Bold" Grid.Row="0"/>
+						<TextBlock Text="Zoom" Grid.Row="1"/>
+						<xctk:IntegerUpDown Name="NB_zoom" FormatString=" {0} %" DefaultValue="80" Increment="10" Minimum="10" Height="{StaticResource NB_height}"  Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI" Grid.Row="1" Grid.Column="1" />
+
+						<TextBlock Text="Display elements" Grid.Row="2"/>
+						<CheckBox Name="CB_femElements" IsChecked="False" Checked="RefreshUI" Unchecked="RefreshUI" Height="20" Width="20"
+                                  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" />
+
+					</Grid>
+					
+					<!-- Calculation -->
+					<Grid Grid.Row="5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="180"/>
+							<ColumnDefinition Width="80"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="35"/>
+							<RowDefinition Height="25"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Text="Calculation:" FontSize="16" FontWeight="Bold" Grid.Row="0"/>
+
+						<TextBlock Text="Action mode" Grid.Row="1"/>
+						<CheckBox Name="CB_actionMode" IsChecked="False" Checked="ActionModeChanged" Unchecked="ActionModeChanged" Height="20" Width="20"
+                                  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" />
+
+						<TextBlock Text="Animation speed" Grid.Row="2"/>
+						<xctk:IntegerUpDown Name="NB_animSpeed" FormatString=" {0} %" DefaultValue="100" Increment="10" Minimum="10" Height="{StaticResource NB_height}" Width="{StaticResource NB_width}"
+                                DisplayDefaultValueOnEmptyText="True" ValueChanged="RefreshUI" Grid.Row="2" Grid.Column="1" />
+
+						<Button Content="Calculate" Name="BTN_calculate" FontSize="16" FontWeight="Bold" Width="120" Height="30" Click="CalculateEvent" Grid.Row="3" Grid.ColumnSpan="2"/>
+						<TextBlock Text="Not calculated" Name="TB_calculated"  Grid.Row="4" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+
+					</Grid>
+				</Grid>
+			</ScrollViewer>
+
+			<!-- SCENE -->
+			<Canvas Name="MainScene" Grid.Column="1" Background="AliceBlue" Margin="10"/>
+		</Grid>
+	</Page>
+</Window>
