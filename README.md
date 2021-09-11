@@ -1,4 +1,4 @@
-# FEM_App
+# FEM App
 
 Finite Element Method (FEM) is a numerical method for modelling various physical phenomena, such as structural mechanics, heat transfer or fluid behaviour. This app is a collection of smaller modules for demonstration of FEM possibilities and engineering applications.
 
